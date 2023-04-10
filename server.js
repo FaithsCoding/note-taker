@@ -1,7 +1,7 @@
 //dependencies
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 //asks express to create a route for every file in the public folder and use the '/' route.
 app.use(express.static("public"));
@@ -15,5 +15,5 @@ require("./routes/htmlRoutes")(app);
 
 //starts the server, also known as an app listener
 app.listen(PORT, () => {
-  console.log("your server is available at localhost ${PORT}");
+  console.log(`Your server is available at http://localhost:${PORT}`);
 });
