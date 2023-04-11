@@ -31,7 +31,7 @@ app.get("*", (req, res) => {
 //receieve a new note and add it to the db.json file and return the saved note
 app.post("/api/notes", (req, res) => {
   let newNote = req.body;
-  let noteList = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+  let noteList = JSON.parse(fs.readFileSync("./db/db.json"));
   let noteLength = noteList.length + 1;
 
   //creates new id for the property basedd on length and assigns it to the object

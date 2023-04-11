@@ -1,6 +1,5 @@
 const server = require("./server");
-const request = supertest(`http://localhost:${4000}`);
-const request = supertest(server);
+const request = `http://localhost:${4000}`;
 
 describe("Test the note taking app routes", () => {
   // Test the GET /notes endpoint
