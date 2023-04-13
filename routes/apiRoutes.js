@@ -4,16 +4,15 @@ const fs = require("fs");
 
 // Node package allowing IDs to have unique names
 const uniqid = require("uniqid");
+const app = require("express").Router();
 
-// Beginning of the routing
-module.exports = (app) => {
   // GET request asking the api/notes to read the db.json file and return saved notes as JSON
-  app.get("/api/notes", (req, res) => {
+  app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "db", "db.json"));
   });
 
   // POST request asking the api/notes to receive a new note to save which gets added to the db.json file and returns a new note for the user
-  app.post("/api/notes", (req, res) => {
+  app.post("/notes", (req, res) => {
     let db = fs.readFileSync("db/db.json");
     db = JSON.parse(db);
 
@@ -31,8 +30,8 @@ module.exports = (app) => {
     res.json(db);
   });
 
-  // DELETE request providing a parameter for /api/notes:id containing the ID of the note to delete
-  app.delete("/api/notes/:id", (req, res) => {
+  // DELETE request providing a parameter for /notes:id containing the ID of the note to delete
+  app.delete("/notes/:id", (req, res) => {
     // This let reads the notes from the db.json
     let db = JSON.parse(fs.readFileSync("db/db.json"));
     // Picks out the ID and removes it
@@ -41,4 +40,5 @@ module.exports = (app) => {
     fs.writeFileSync("db/db.json", JSON.stringify(deleteNotes));
     res.json(deleteNotes);
   });
-};
+
+module.exports = app;
